@@ -34,6 +34,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.amber,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: 'Chart'),
