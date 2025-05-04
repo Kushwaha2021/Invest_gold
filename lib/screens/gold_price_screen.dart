@@ -6,14 +6,24 @@ class GoldPriceScreen extends StatelessWidget {
   const GoldPriceScreen({super.key});
 
   Future<void> _selectCustomDateRange(BuildContext context, GoldRateViewModel viewModel) async {
+
+    final initialRange = viewModel.selectedRange == 'custom' &&
+        viewModel.customStartDate != null &&
+        viewModel.customEndDate != null
+        ? DateTimeRange(
+      start: viewModel.customStartDate!,
+      end: viewModel.customEndDate!,
+    )
+        : DateTimeRange(
+      start: DateTime.now().subtract(const Duration(days: 30)),
+      end: DateTime.now(),
+    );
+
     final DateTimeRange? picked = await showDateRangePicker(
       context: context,
       firstDate: DateTime(2023),
       lastDate: DateTime.now(),
-      initialDateRange: DateTimeRange(
-        start: DateTime.now().subtract(const Duration(days: 30)),
-        end: DateTime.now(),
-      ),
+      initialDateRange: initialRange,
     );
 
     if (picked != null) {
